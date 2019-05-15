@@ -14,32 +14,32 @@ const _initPredictiveTable = (g) => {
     return predictiveTable;
 };
 
-export const generateTabularPredictiveTable = (g) => {
+export const generateTabularPredictiveTable = (g, follows) => {
     const predictiveTable = _initPredictiveTable(g);
     const firsts = getFirstsFromG(g);
     // @TODO: Chamar função para obter os follows
     // const follows = getFollowsFromG(g);
-    const follows = {};
+    // const follows = {};
 
-    for (const key in gramatic) {
-        const productions = gramatic[key];
+    for (const key in g) {
+        const productions = g[key];
 
         const row = predictiveTable[key]
         productions.forEach((production) => {
             const firstSymbol = production[0];
             if (isTerminal(firstSymbol)) {
-                row[firstSymbol] = { [key]: productions };
+                row[firstSymbol] = productions;
             }
             else {
                 const symbolFirsts = firsts[firstSymbol];
                 symbolFirsts.forEach((first) => {
                     if (first !== 'empty') {
-                        row[first] = { [key]: productions };
+                        row[first] = productions;
                     }
                     else {
                         const symbolFollows = follows[firstSymbol];
                         symbolFollows.forEach((follow) => {
-                            row[follow] = { [key]: productions };
+                            row[follow] = productions;
                         });
                     }
                 })
@@ -49,3 +49,7 @@ export const generateTabularPredictiveTable = (g) => {
 
     return predictiveTable;
 }
+
+// import { d7 } from '../data-sets';
+// const result = generateTabularPredictiveTable(d7.grammar, d7.follows)
+// console.log('result', result);

@@ -1,13 +1,13 @@
 import { isTerminal } from '../utils';
 
 const _getFirst = (g, prod) => {
-    for (symbol of prod) {
+    for (const symbol of prod) {
         if (isTerminal(symbol)) {
                 return symbol;
         }
         else {
             const firsts = [];
-            for (productions of g[symbol]) {
+            for (const productions of g[symbol]) {
                 firsts.push(_getFirst(g, productions));
             }
             return firsts;
@@ -16,7 +16,7 @@ const _getFirst = (g, prod) => {
 }
 
 const _treeToArray = (arr, strArrAccumulator = []) => {
-    for (item of arr) {
+    for (const item of arr) {
         if (item instanceof Array) {
             return _treeToArray(item, strArrAccumulator)
         }
