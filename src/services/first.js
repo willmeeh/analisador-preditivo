@@ -80,11 +80,10 @@
 //         X: [['a']]
     }
     
-    const jsonInput = q4;
     const isTerminal = (symbol) => {
         return !/[A-Z]/g.test(symbol);
     }
-    const getFirst = (prod) => {
+    const getFirst = (jsonInput, prod) => {
         for (symbol of prod) {
             if (isTerminal(symbol)) {
                  return symbol;
@@ -92,12 +91,11 @@
             else {
                 const firsts = [];
                 for (productions of jsonInput[symbol]) {
-                    firsts.push(getFirst(productions));
+                    firsts.push(getFirst(jsonInput, productions));
                 }
                 return firsts;
             }
         }
-//         return firsts;
     }
     
     const treeToArray = (arr, strArrAccumulator = []) => {
@@ -111,22 +109,28 @@
         }
         return strArrAccumulator;
     }
-    const firsts = {};
-    for (const key in jsonInput) {
-        const productions = jsonInput[key];
-        
-        let currFirsts = [];
-        productions.forEach((prod) => {
-            const first = getFirst(prod);
-            if (first instanceof Array) {
-                const treeAsArray = treeToArray(first);
-                currFirsts = currFirsts.concat(treeAsArray);
-            }
-            else {
-                currFirsts.push(first);
-            }
-        });
-        firsts[key] = currFirsts;
+
+    // @TOOD exportar função
+    const getFirsts = (jsonInput) => {
+        const firsts = {};
+        for (const key in jsonInput) {
+            const productions = jsonInput[key];
+
+            let currFirsts = [];
+            productions.forEach((prod) => {
+                const first = getFirst(jsonInput, prod);
+                if (first instanceof Array) {
+                    const treeAsArray = treeToArray(first);
+                    currFirsts = currFirsts.concat(treeAsArray);
+                }
+                else {
+                    currFirsts.push(first);
+                }
+            });
+            firsts[key] = currFirsts;
+        }
+        return firsts;
     }
-    console.log('firsts', firsts);
+    
+    console.log('getFirsts', getFirsts(q4));
 })();
