@@ -1,4 +1,4 @@
-import { arthur_d1 } from '../data-sets';
+// import { arthur_d1 } from '../data-sets';
 
 
 const escreverTabelafinal = (tabelaFinal) => {
@@ -15,6 +15,14 @@ const escreverTabelafinal = (tabelaFinal) => {
         console.log("\n");
 
     }
+
+    if (tabelaFinal.entrada[tamanho-1] === tabelaFinal.pilha[tamanho-1]
+        && tabelaFinal.entrada[tamanho-1] === '$') {
+        console.log("Aceita");
+    } else {
+        console.log("Rejeita");
+    }
+
 }
 
 const verificarSentenca = (pilha, entrada, tabelaPreditivaTabular) => {

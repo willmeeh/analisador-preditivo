@@ -1,22 +1,4 @@
-const d7 = {
-    grammar: {
-        E: [
-            ['T', 'EL']
-        ],
-        EL: [
-            ['+', 'T', 'EL'],
-            ['empty']
-        ],
-        T: [
-            ['a']
-        ]
-    },
-    firsts: {
-        E: ['a'],
-        EL: ['+', 'empty'],
-        T: ['a']
-    }
-};
+// import { d7 } from '../data-sets';
 
 const isTerminal = (symbol) => {
     return !/[A-Z]/g.test(symbol);
@@ -103,9 +85,7 @@ const getFollows = (grammar, firsts) => {
     return follows;
 }
 
-
-
-console.log(getFollows(d7.grammar, d7.firsts));
+// console.log(getFollows(d7.grammar, d7.firsts));
 
 
 
