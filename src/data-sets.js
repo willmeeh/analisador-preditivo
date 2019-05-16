@@ -1,4 +1,4 @@
-export default {
+const grammars = {
     d1: {
         grammar: {
             S: [
@@ -13,6 +13,11 @@ export default {
                 ['a'],
                 ['empty']
             ]
+        },
+        firsts: {
+            S: ['a', 'd'],
+            B: ['c', 'empty'],
+            D: ['a', 'empty']
         }
     },
     d2: {
@@ -29,6 +34,12 @@ export default {
                 ['Y'],
                 ['a']
             ]
+        },
+        firsts: {
+            Z: [ 'c', 'empty', 'a', 'd' ],
+            Y: [ 'c', 'empty' ],
+            X: [ 'c', 'empty', 'a' ]
+
         }
     },
     d3: {
@@ -45,6 +56,11 @@ export default {
                 ['a'],
                 ['empty']
             ]
+        },
+        firsts: {
+            S: ['(', 'b'],
+            A: ['a', 'empty'],		
+            B: ['a', 'empty'],
         }
     },
     d4: {
@@ -64,6 +80,12 @@ export default {
                 ['a'],
                 ['empty']
             ]
+        },
+        firsts: {
+            S: ['(', 'b'],
+            A: ['a', 'empty'],
+            X: [';', 'empty'],
+            B: ['a', 'empty'],
         }
     },
     d5: {
@@ -73,6 +95,7 @@ export default {
             ],
             EL: [
                 ['+', 'T', 'EL'],
+                ['-', 'T', 'EL'],
                 ['empty']
             ],
             T: [
@@ -80,12 +103,20 @@ export default {
             ],
             TL: [
                 ['*', 'F', 'TL'],
+                ['/', 'F', 'TL'],
                 ['empty']
             ],
             F: [
                 ['(', 'E', ')'],
-                ['id'],
+                ['a'],
             ]
+        },
+        firsts: {
+            E: ['(', 'a'],
+            EL: ['+', '-', 'empty'],
+            T: ['(', 'a'],
+            TL: ['*', '/', 'empty'],
+            F: ['(', 'a']
         }
     },
     d6: {
@@ -100,8 +131,8 @@ export default {
             ]
         },
         firsts: {
-            S: [ '(', '[', 'a' ],
-            A: [ 'a' ],
+            S: ['(', '[', 'a'],
+            A: ['a'],
         },
         follows: {
             S: ['$', ')', ']'],
@@ -129,16 +160,16 @@ export default {
         follows: {
             E: ['$'],
             EL: ['$'],
-            T: ['+','$']
+            T: ['+', '$']
         }
     },
     d8: {
         grammar: {
-            E: [ [ 'T', 'EL' ] ],
-            EL: [ [ '+', 'T', 'EL' ], ['empty'] ],
-            T: [ ['F', 'TL' ] ],
-            TL: [ ['*','F','TL'], ['empty'] ],
-            F: [ [ '(', 'E', ')' ], ['a'] ]
+            E: [['T', 'EL']],
+            EL: [['+', 'T', 'EL'], ['empty']],
+            T: [['F', 'TL']],
+            TL: [['*', 'F', 'TL'], ['empty']],
+            F: [['(', 'E', ')'], ['a']]
         },
         firsts: {
             E: ['(', 'a'],
@@ -155,4 +186,18 @@ export default {
             F: ['*', '+', ')', '$'],
         },
     }
+};
+
+export default grammars;
+
+// https://mikedevice.github.io/first-follow/
+const convertGramar = (g) => {
+    for (const initOfSentence in g) {
+        for (const symbols of g[initOfSentence]) {
+            const str = `${initOfSentence} -> ${symbols.join(' ')}`;
+            console.log(str.replace('empty', 'ε'));
+        }
+    }
 }
+
+// convertGramar(grammars.d2.grammar);

@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { isTerminal } from '../utils';
 
 const _getFirst = (g, prod) => {
@@ -15,18 +16,6 @@ const _getFirst = (g, prod) => {
     }
 }
 
-const _treeToArray = (arr, strArrAccumulator = []) => {
-    for (const item of arr) {
-        if (item instanceof Array) {
-            return _treeToArray(item, strArrAccumulator)
-        }
-        else {
-            strArrAccumulator.push(item);
-        }
-    }
-    return strArrAccumulator;
-}
-
 export const getFirstsFromG = (g) => {
     const firsts = {};
     for (const key in g) {
@@ -36,14 +25,15 @@ export const getFirstsFromG = (g) => {
         productions.forEach((prod) => {
             const first = _getFirst(g, prod);
             if (first instanceof Array) {
-                const treeAsArray = _treeToArray(first);
-                currFirsts = currFirsts.concat(treeAsArray);
+                const firstFlatten = _.flatten(first);
+                currFirsts = currFirsts.concat(firstFlatten);
+                
             }
             else {
                 currFirsts.push(first);
             }
         });
-        firsts[key] = currFirsts;
+        firsts[key] = _.uniq(currFirsts);
     }
     return firsts;
 }

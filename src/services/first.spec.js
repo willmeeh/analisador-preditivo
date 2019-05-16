@@ -1,8 +1,17 @@
 import { getFirstsFromG } from './first';
-import { d1 } from '../data-sets';
+import datasets from '../data-sets';
 
-it('get firsts of d1 data set', () => {
-    const { grammar } = d1;
-    const firsts = getFirstsFromG(grammar);
-    console.log('firsts', firsts);
-});
+const createTest = (datasetKey) => {
+    it(`get firsts of data set ${datasetKey}`, () => {
+        const { grammar, firsts } = datasets[datasetKey];
+        const generatedFirsts = getFirstsFromG(grammar);
+        if (firsts) {
+            expect(generatedFirsts).toEqual(firsts);
+        }
+    });
+}
+
+// createTest('d2');
+for (const datasetKey in datasets) {
+    createTest(datasetKey);
+}
