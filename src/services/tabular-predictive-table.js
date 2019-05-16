@@ -14,9 +14,11 @@ const _initPredictiveTable = (g) => {
     return predictiveTable;
 };
 
-export const generateTabularPredictiveTable = (g, follows) => {
+export const generateTabularPredictiveTable = (g, firsts = null, follows = null) => {
     const predictiveTable = _initPredictiveTable(g);
-    const firsts = getFirstsFromG(g);
+    if (!firsts) {
+        firsts = getFirstsFromG(g);
+    }
     // @TODO: Chamar função para obter os follows
     // const follows = getFollowsFromG(g);
     // const follows = {};

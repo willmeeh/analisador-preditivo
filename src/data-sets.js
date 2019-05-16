@@ -30,6 +30,11 @@ const grammars = {
             S: ['a', 'd'],
             B: ['c', 'empty'],
             D: ['a', 'empty']
+        },
+        follows: {
+            S: ['$'],
+            B: ['$'],
+            D: ['a']
         }
     },
     d2: {
@@ -51,7 +56,11 @@ const grammars = {
             Z: [ 'c', 'empty', 'a', 'd' ],
             Y: [ 'c', 'empty' ],
             X: [ 'c', 'empty', 'a' ]
-
+        },
+        follows: {
+            Z: ['$'],
+            Y: ['c', 'b', 'a' ],
+            X: ['c', 'b', 'a' ]
         }
     },
     d3: {
@@ -73,6 +82,11 @@ const grammars = {
             S: ['(', 'b'],
             A: ['a', 'empty'],		
             B: ['a', 'empty'],
+        },
+        follows: {
+            S: ['$'],
+            A: [')'],
+            B: [':', ')' ],
         }
     },
     d4: {
@@ -98,40 +112,15 @@ const grammars = {
             A: ['a', 'empty'],
             X: [';', 'empty'],
             B: ['a', 'empty'],
+        },
+        follows: {
+            S: ['$'],
+            A: [')'],
+            X: [')'],
+            B: [';'],
         }
     },
     d5: {
-        grammar: {
-            E: [
-                ['T', 'EL'],
-            ],
-            EL: [
-                ['+', 'T', 'EL'],
-                ['-', 'T', 'EL'],
-                ['empty']
-            ],
-            T: [
-                ['F', 'TL']
-            ],
-            TL: [
-                ['*', 'F', 'TL'],
-                ['/', 'F', 'TL'],
-                ['empty']
-            ],
-            F: [
-                ['(', 'E', ')'],
-                ['a'],
-            ]
-        },
-        firsts: {
-            E: ['(', 'a'],
-            EL: ['+', '-', 'empty'],
-            T: ['(', 'a'],
-            TL: ['*', '/', 'empty'],
-            F: ['(', 'a']
-        }
-    },
-    d6: {
         grammar: {
             S: [
                 ['(', 'S', ')'],
@@ -151,7 +140,7 @@ const grammars = {
             A: ['$', ')', ']']
         }
     },
-    d7: {
+    d6: {
         grammar: {
             E: [
                 ['T', 'EL']
@@ -175,7 +164,7 @@ const grammars = {
             T: ['+', '$']
         }
     },
-    d8: {
+    d7: {
         grammar: {
             E: [['T', 'EL']],
             EL: [['+', 'T', 'EL'], ['empty']],
@@ -197,6 +186,31 @@ const grammars = {
             TL: ['+', ')', '$'],
             F: ['*', '+', ')', '$'],
         },
+    },
+    d8: {
+        grammar: {
+            S: [ 
+                ['a', 'S', 'a'], 
+                ['A']
+            ],
+            A: [ 
+                ['b', 'B']
+            ],
+            B: [ 
+                ['c', 'B', 'c'],
+                ['c']
+            ]
+        },
+        firsts: {
+            S: ['a', 'b'],
+            A: ['b'],
+            B: ['c']
+        },
+        follows: {
+            S: ['$', 'a'], 
+            A: ['$', 'a'], 
+            B: ['$', 'a', 'c']
+        }
     }
 };
 
@@ -212,4 +226,4 @@ const convertGramar = (g) => {
     }
 }
 
-// convertGramar(grammars.d2.grammar);
+// convertGramar(grammars.d9.grammar);

@@ -1,8 +1,6 @@
 // import { d7 } from '../data-sets';
-
-const isTerminal = (symbol) => {
-    return !/[A-Z]/g.test(symbol);
-}
+import { isTerminal } from '../utils';
+import { getFirstsFromG } from './first';
 
 const follow = (terminal, grammar, firsts, follows) => {
 
@@ -159,3 +157,8 @@ const getFollows = (grammar, firsts) => {
 
 //     return follows;
 // }
+
+export const getFollowsFromG = (g) => {
+    const firsts = getFirstsFromG(g);
+    return getFollows(g, firsts)
+}

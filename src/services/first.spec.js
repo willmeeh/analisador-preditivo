@@ -2,13 +2,13 @@ import { getFirstsFromG } from './first';
 import datasets from '../data-sets';
 
 const createTest = (datasetKey) => {
-    it(`get firsts of data set ${datasetKey}`, () => {
-        const { grammar, firsts } = datasets[datasetKey];
+    const { grammar, firsts } = datasets[datasetKey];
+    if (firsts) {
+        it(`get firsts of data set ${datasetKey}`, () => {
         const generatedFirsts = getFirstsFromG(grammar);
-        if (firsts) {
             expect(generatedFirsts).toEqual(firsts);
-        }
-    });
+        });
+    }
 }
 
 // createTest('d2');
