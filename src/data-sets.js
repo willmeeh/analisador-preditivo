@@ -34,7 +34,7 @@ const grammars = {
         follows: {
             S: ['$'],
             B: ['$'],
-            D: ['a']
+            D: ['b']
         }
     },
     d2: {
@@ -43,14 +43,15 @@ const grammars = {
                 ['X', 'Y', 'Z'],
                 ['d']
             ],
+            X: [
+                ['Y'],
+                ['a']
+            ],
             Y: [
                 ['c'],
                 ['empty']
             ],
-            X: [
-                ['Y'],
-                ['a']
-            ]
+           
         },
         firsts: {
             Z: [ 'c', 'empty', 'a', 'd' ],
@@ -59,8 +60,8 @@ const grammars = {
         },
         follows: {
             Z: ['$'],
-            Y: ['c', 'b', 'a' ],
-            X: ['c', 'b', 'a' ]
+            Y: ['c', 'd', 'a' ],
+            X: ['c', 'd', 'a' ]
         }
     },
     d3: {
