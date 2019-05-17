@@ -36,29 +36,33 @@ export const generateTabularPredictiveTable = (
         const row = predictiveTable[key]
         productions.forEach((production) => {
             const firstSymbol = production[0];
-            if (isTerminal(firstSymbol)) {
-                row[firstSymbol === 'empty' ? '$' : firstSymbol] = production;
+            if (isTerminal(firstSymbol) && firstSymbol !== 'empty') {
+                row[firstSymbol] = production;
             }
             else {
-                const symbolFirsts = firsts[firstSymbol];
-                symbolFirsts.forEach((first) => {
-                    if (first !== 'empty') {
-                        row[first === 'empty' ? '$' : first] = production;
-                    }
-                    else {
-                        const symbolFollows = follows[firstSymbol];
-                        symbolFollows.forEach((follow) => {
-                            row[follow === 'empty' ? '$' : follow] = production;
-                        });
-                    }
-                })
+                if (firstSymbol !== 'empty') {
+                    const symbolFirsts = firsts[firstSymbol];
+                    symbolFirsts.forEach((first) => {
+                        if (first !== 'empty') {
+                            row[first] = production;
+                        }
+                        else {
+                            const symbolFollows = follows[firstSymbol];
+                            symbolFollows.forEach((follow) => {
+                                row[follow === 'empty' ? '$' : follow] = production;
+                            });
+                        }
+                    })
+                }
+                else {
+                    const symbolFollows = follows[key];
+                    symbolFollows.forEach((follow) => {
+                        row[follow === 'empty' ? '$' : follow] = production;
+                    });
+                }
             }
         });
     }
 
     return predictiveTable;
 }
-
-// import { d7 } from '../data-sets';
-// const result = generateTabularPredictiveTable(d7.grammar, d7.follows)
-// console.log('result', result);
