@@ -1,21 +1,28 @@
 import { isTerminal, getAllNonTerminalsFromG } from '../utils';
 import { getFirstsFromG } from './first';
 
-const _initPredictiveTable = (g) => {
+const _initPredictiveTable = (g, mapNonMatchedTerminals) => {
     const terminals = getAllNonTerminalsFromG(g);
     const predictiveTable = {};
     for (const key in g) {
         predictiveTable[key] = {};
-        terminals.forEach((t) => {
-            predictiveTable[key][t] = null;
-        });
+        if (mapNonMatchedTerminals) {
+            terminals.forEach((t) => {
+                predictiveTable[key][t === 'empty' ? '$' : t] = null;
+            });
+        }
     }
 
     return predictiveTable;
 };
 
-export const generateTabularPredictiveTable = (g, firsts = null, follows = null) => {
-    const predictiveTable = _initPredictiveTable(g);
+export const generateTabularPredictiveTable = (
+    g, 
+    firsts = null, 
+    follows = null, 
+    mapNonMatchedTerminals = false
+) => {
+    const predictiveTable = _initPredictiveTable(g, mapNonMatchedTerminals);
     if (!firsts) {
         firsts = getFirstsFromG(g);
     }
@@ -30,18 +37,18 @@ export const generateTabularPredictiveTable = (g, firsts = null, follows = null)
         productions.forEach((production) => {
             const firstSymbol = production[0];
             if (isTerminal(firstSymbol)) {
-                row[firstSymbol] = productions;
+                row[firstSymbol === 'empty' ? '$' : firstSymbol] = production;
             }
             else {
                 const symbolFirsts = firsts[firstSymbol];
                 symbolFirsts.forEach((first) => {
                     if (first !== 'empty') {
-                        row[first] = productions;
+                        row[first === 'empty' ? '$' : first] = production;
                     }
                     else {
                         const symbolFollows = follows[firstSymbol];
                         symbolFollows.forEach((follow) => {
-                            row[follow] = productions;
+                            row[follow === 'empty' ? '$' : follow] = production;
                         });
                     }
                 })
