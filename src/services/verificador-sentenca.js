@@ -73,8 +73,26 @@ const verificarSentenca = (pilha, entrada, tabelaPreditivaTabular) => {
             }
         }
     }
+    
     escreverTabelafinal(tabelaFinal);
+    let tamanho = tabelaFinal.pilha.length;
+    // console.log('tamanho', tamanho)
+    if (tamanho && tamanho > 0 && tabelaFinal.entrada[tamanho-1] === tabelaFinal.pilha[tamanho-1]
+        && tabelaFinal.entrada[tamanho-1] === '$') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-
+export const testSentenceInPredictiveTable = (
+    initSymbol,
+    predictiveTable,
+    sentence
+) => {
+    if (sentence && typeof sentence !== 'array') {
+        sentence = sentence.split(' ');
+    }
+    return verificarSentenca(["$", initSymbol], sentence, predictiveTable);
+}
 // verificarSentenca(["$", "E"], ["a", "+", "a", "+", "a", "$"], arthur_d1);

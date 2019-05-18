@@ -174,7 +174,17 @@ const grammars = {
             T: {
                 'a': ['a'],
             }
-        }
+        },
+        sentences: [
+            {
+                value: 'a a a',
+                expected: false
+            },
+            {
+                value: 'a',
+                expected: true
+            }
+        ]
     },
     d7: {
         grammar: {
