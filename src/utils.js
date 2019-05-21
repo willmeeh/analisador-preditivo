@@ -8,6 +8,7 @@ export const getAllNonTerminalsFromG = (g) => {
     for (const key in g) {
         const productions = g[key];
         productions.forEach((production) => {
+            console.log(production);
             production.forEach((symbol) => {
                 if (isTerminal(symbol)) {
                     if (terminals.indexOf(symbol) === -1) {
