@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Card } from 'antd';
+import { Card, Table, Button } from 'antd';
 
 import { getFirstsFromG } from '../../services/first';
 import { getFollowsFromG } from '../../services/follow';
@@ -8,9 +8,22 @@ import { newFormat } from '../../services/convertToNewFormat';
 
 export default class PredictiveTable extends Component {
 
+    state = {
+        columns: [],
+        dataSource: []
+    }
+
+    updateState = () => {
+        console.log(this.props.all);
+        this.formatPredictiveTable(this.props.all);
+    }
+
     formatPredictiveTable = (all) => {
         let productionsList = all.productions;
         let terminalList = all.terminalList;
+
+        const columns = [];
+        const dataSource = [];
 
         if (productionsList !== undefined && undefined !== terminalList) {
 
@@ -21,11 +34,43 @@ export default class PredictiveTable extends Component {
             console.log('newGramar:', newGramar, 'followList:', followList, 'firstList:', firstList);
 
             const tabularPredictiveTable = generateTabularPredictiveTable(newGramar, firstList, followList);
-            console.log(tabularPredictiveTable)
-            return tabularPredictiveTable;
+            console.log(tabularPredictiveTable);
+
+            columns.push({
+                title: 'Prod',
+                dataIndex: 'Prod',
+                key: 'Prod',
+            });
+            terminalList.forEach((item) => {
+                columns.push({
+                    title: item,
+                    dataIndex: item,
+                    key: item,
+                })
+            })
+
+            for (var property in tabularPredictiveTable) {
+                let linha = {};
+                linha['Prod'] = property;
+                // eslint-disable-next-line no-loop-func
+                terminalList.forEach((item) => {
+                    if (tabularPredictiveTable[property][item] !== undefined) {
+                        linha[item] = property + " -> " + tabularPredictiveTable[property][item].join("");
+                    }
+                });
+                dataSource.push(linha);
+            }
+
+            this.setState({
+                columns,
+                dataSource
+            })
+
+
+            return '';
         }
 
-        return {};
+        return '';
     };
 
     render() {
@@ -35,15 +80,8 @@ export default class PredictiveTable extends Component {
         return (
             <Fragment>
                 <Card style={cardStyle} title={<b>Predictive Table</b>}>
-                    <div className="loop-follow">
-                        {
-                            Object.entries(this.formatPredictiveTable(this.props.all)).map(([key, value], index) => (
-                                <div key={key + index} id={index + key}>
-                                    {key} : {JSON.stringify(value)}
-                                </div>
-                            ))
-                        }
-                    </div>
+                    <Button onClick={this.updateState} type="primary">Update</Button>
+                    <Table dataSource={this.state.dataSource} columns={this.state.columns} />
                 </Card>
             </Fragment>
         );

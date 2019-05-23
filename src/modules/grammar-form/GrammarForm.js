@@ -16,11 +16,11 @@ class InputForm extends Component {
     nonTerminalList: ['S', 'A', 'B'],
     terminalList: ['c', 'a', 'b', 'empty'],
     productionsList: [
-      {nonTerminal: 'S', terminalsList: ['cAa']},
-      {nonTerminal: 'A', terminalsList: ['cb']},
-      {nonTerminal: 'A', terminalsList: ['B']},
-      {nonTerminal: 'B', terminalsList: ['bcB']},
-      {nonTerminal: 'B', terminalsList: ['empty']},
+      { nonTerminal: 'S', terminalsList: ['cAa'] },
+      { nonTerminal: 'A', terminalsList: ['cb'] },
+      { nonTerminal: 'A', terminalsList: ['B'] },
+      { nonTerminal: 'B', terminalsList: ['bcB'] },
+      { nonTerminal: 'B', terminalsList: ['empty'] },
     ],
     production: {
       nonTerminal: '',
@@ -131,13 +131,13 @@ class InputForm extends Component {
   }
 
   delProduction = (index) => {
-      let productionsList = this.state.productionsList;
-      productionsList.splice(index, 1);
-  
-      this.setState({
-        productionsList: productionsList
-      });
-    }
+    let productionsList = this.state.productionsList;
+    productionsList.splice(index, 1);
+
+    this.setState({
+      productionsList: productionsList
+    });
+  }
 
   setNonTerminalProduction = (value, options) => {
     let row = options.props.row;
@@ -161,14 +161,24 @@ class InputForm extends Component {
     this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList);
   }
 
+
+
   onSentenceChange = (e, index, indexTerminal) => {
     let value = e.target.value;
     let char = value.slice(-1);
 
-    let containsTerminal = this.state.terminalList.indexOf(char) > -1;
+    // let containsTerminal = this.state.terminalList.indexOf(char) > -1;
     let containsNonTerminal = this.state.nonTerminalList.indexOf(char) > -1;
+    let containsTerminal = false;
+    this.state.terminalList.forEach((terminal) => {
+      if (terminal.startsWith(value) ) {
+        containsNonTerminal = true;
+      }
+    });
 
-    if ((/[^$|^A-Z^a-z]/.test(value) || /[!"#$%&'()*+.\/:;<=>?@\[\\\]^_`{|}~-]?$/.test(value) ) && (containsTerminal || containsNonTerminal || value === '')) {
+
+
+    if ((/[^$|^A-Z^a-z]/.test(value) || /[!"#$%&'()*+.\/:;<=>?@\[\\\]^_`{|}~-]?$/.test(value)) && (containsTerminal || containsNonTerminal || value === '')) {
       let productionsList = this.state.productionsList;
       productionsList[index].terminalsList[indexTerminal] = value;
 

@@ -43,7 +43,9 @@ const follow = (terminal, grammar, firsts, follows) => {
                     for (let i = location; i >= 0; i--) {
                         if (!isTerminal(sentencas[i]) && sentencas[i + 2] === undefined) {
                             entrou = true;
-                            resultado.push(...follows[prod]);
+                            if (follows[prod] !== undefined) {
+                                resultado.push(...follows[prod]);
+                            }
                         }
                         break;
 
