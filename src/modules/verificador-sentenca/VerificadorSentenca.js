@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from './node_modules/react';
-import { Card, Table, Button, Input } from './node_modules/antd';
+import React, { Component, Fragment } from 'react';
+import { Card, Table, Button, Input } from 'antd';
 
 import { getFirstsFromG } from '../../services/first';
 import { getFollowsFromG } from '../../services/follow';
