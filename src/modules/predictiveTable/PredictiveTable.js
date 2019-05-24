@@ -14,27 +14,27 @@ export default class PredictiveTable extends Component {
     }
 
     updateState = () => {
-        console.log(this.props.all);
         this.formatPredictiveTable(this.props.all);
     }
 
     formatPredictiveTable = (all) => {
         let productionsList = all.productions;
         let terminalList = all.terminalList;
+        let nonTerminalList = all.nonTerminalList;
 
         const columns = [];
         const dataSource = [];
 
         if (productionsList !== undefined && undefined !== terminalList) {
 
-            const newGramar = newFormat(productionsList, terminalList);
+            const newGramar = newFormat(productionsList, terminalList, nonTerminalList);
             const followList = getFollowsFromG(newGramar);
             const firstList = getFirstsFromG(newGramar);
 
-            console.log('newGramar:', newGramar, 'followList:', followList, 'firstList:', firstList);
+            // console.log('newGramar:', newGramar, 'followList:', followList, 'firstList:', firstList);
 
             const tabularPredictiveTable = generateTabularPredictiveTable(newGramar, firstList, followList);
-            console.log(tabularPredictiveTable);
+            // console.log(tabularPredictiveTable);
 
             columns.push({
                 title: 'Prod',

@@ -10,20 +10,24 @@ import Grammar from './modules/helpers/grammar/Grammar'
 import First from './modules/first/First';
 import Follow from './modules/follow/Follow';
 import PredictiveTable from './modules/predictiveTable/PredictiveTable';
+import VerificadorSentenca from './modules/verificador-sentenca/verificadorSentenca'
 
 class App extends Component {
   state = {
     productions: [],
     terminalList: [],
+    nonTerminalList: [],
     all: {}
   }
 
-  handleProductionsChange = (productions, terminalList) => {
+  handleProductionsChange = (productions, terminalList, nonTerminalList) => {
     this.setState({ productions });
     this.setState({ terminalList });
+    this.setState({ nonTerminalList })
     const all = {
       productions,
-      terminalList
+      terminalList,
+      nonTerminalList
     }
     this.setState({ all })
   };
@@ -54,8 +58,11 @@ class App extends Component {
           <Col md={8}>
             <Follow all={this.state.all}></Follow>
           </Col>
-          <Col md={8}>
+          <Col md={24}>
             <PredictiveTable all={this.state.all}></PredictiveTable>
+          </Col>
+          <Col md={24}>
+            <VerificadorSentenca all={this.state.all}></VerificadorSentenca>
           </Col>
         </Row>
       </div>

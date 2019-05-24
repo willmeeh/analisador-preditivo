@@ -9,10 +9,11 @@ export default class First extends Component {
     formatFirst = (all) => {
         let productionsList = all.productions;
         let terminalList = all.terminalList;
+        let nonTerminalList = all.nonTerminalList;
 
         if (productionsList !== undefined && undefined !== terminalList) {
 
-            const newGramar = newFormat(productionsList, terminalList);
+            const newGramar = newFormat(productionsList, terminalList, nonTerminalList);
             const firstList = getFirstsFromG(newGramar);
             return firstList;
         }

@@ -10,17 +10,35 @@ const { Search } = Input;
 class InputForm extends Component {
 
 
+  // state = {
+  //   nonTerminal: '',
+  //   terminal: '',
+  //   nonTerminalList: ['S', 'A', 'B'],
+  //   terminalList: ['c', 'a', 'b', 'empty'],
+  //   productionsList: [
+  //     { nonTerminal: 'S', terminalsList: ['cAa'] },
+  //     { nonTerminal: 'A', terminalsList: ['cb'] },
+  //     { nonTerminal: 'A', terminalsList: ['B'] },
+  //     { nonTerminal: 'B', terminalsList: ['bcB'] },
+  //     { nonTerminal: 'B', terminalsList: ['empty'] },
+  //   ],
+  //   production: {
+  //     nonTerminal: '',
+  //     terminalsList: []
+  //   }
+  // };
+
+
   state = {
     nonTerminal: '',
     terminal: '',
-    nonTerminalList: ['S', 'A', 'B'],
-    terminalList: ['c', 'a', 'b', 'empty'],
+    nonTerminalList: ['E', 'EL', 'T'],
+    terminalList: ['a', '+', '$', 'empty'],
     productionsList: [
-      { nonTerminal: 'S', terminalsList: ['cAa'] },
-      { nonTerminal: 'A', terminalsList: ['cb'] },
-      { nonTerminal: 'A', terminalsList: ['B'] },
-      { nonTerminal: 'B', terminalsList: ['bcB'] },
-      { nonTerminal: 'B', terminalsList: ['empty'] },
+      { nonTerminal: 'E', terminalsList: ['T','EL'] },
+      { nonTerminal: 'EL', terminalsList: ['+','T','EL'] },
+      { nonTerminal: 'EL', terminalsList: ['empty'] },
+      { nonTerminal: 'T', terminalsList: ['a'] },
     ],
     production: {
       nonTerminal: '',
@@ -41,7 +59,7 @@ class InputForm extends Component {
   // };
 
   componentDidMount() {
-    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList);
+    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList, this.state.nonTerminalList);
   }
 
   //NonTerminal
@@ -127,7 +145,7 @@ class InputForm extends Component {
       productionsList: [...this.state.productionsList, { terminalsList: [] }]
     })
 
-    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList);
+    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList, this.state.nonTerminalList);
   }
 
   delProduction = (index) => {
@@ -147,7 +165,7 @@ class InputForm extends Component {
       productionsList: productionsList
     });
 
-    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList);
+    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList, this.state.nonTerminalList);
   }
 
   createNewTerminalProduction = (index) => {
@@ -158,7 +176,7 @@ class InputForm extends Component {
       productionsList: productionsList
     });
 
-    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList);
+    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList, this.state.nonTerminalList);
   }
 
 
@@ -171,7 +189,7 @@ class InputForm extends Component {
     let containsNonTerminal = this.state.nonTerminalList.indexOf(char) > -1;
     let containsTerminal = false;
     this.state.terminalList.forEach((terminal) => {
-      if (terminal.startsWith(value) ) {
+      if (terminal.startsWith(value)) {
         containsNonTerminal = true;
       }
     });
@@ -187,7 +205,7 @@ class InputForm extends Component {
       });
     }
 
-    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList);
+    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList, this.state.nonTerminalList);
   }
 
   delSentence = (index, indexTerminal) => {
@@ -199,7 +217,7 @@ class InputForm extends Component {
       productionsList: productions
     });
 
-    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList);
+    this.props.handleProductionsChange(this.state.productionsList, this.state.terminalList, this.state.nonTerminalList);
   }
 
   terminalProductionOnChange = (e) => {

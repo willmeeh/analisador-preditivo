@@ -177,13 +177,9 @@ const grammars = {
         },
         sentences: [
             {
-                value: 'a a a',
+                value: 'a + a + a $',
                 expected: false
             },
-            {
-                value: 'a',
-                expected: true
-            }
         ]
     },
     d7: {
