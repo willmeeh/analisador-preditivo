@@ -10,7 +10,8 @@ import Grammar from './modules/helpers/grammar/Grammar'
 import First from './modules/first/First';
 import Follow from './modules/follow/Follow';
 import PredictiveTable from './modules/predictiveTable/PredictiveTable';
-import VerificadorSentenca from './modules/verificador-sentenca/verificadorSentenca'
+import VerificadorSentenca from './modules/verificador-sentenca/VerificadorSentenca'
+
 
 class App extends Component {
   state = {
