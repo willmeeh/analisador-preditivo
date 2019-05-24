@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.02a03453.chunk.css",
-    "main.js": "/react-gh-pages/static/js/main.7ede934b.chunk.js",
-    "main.js.map": "/react-gh-pages/static/js/main.7ede934b.chunk.js.map",
-    "runtime~main.js": "/react-gh-pages/static/js/runtime~main.ac2d5040.js",
-    "runtime~main.js.map": "/react-gh-pages/static/js/runtime~main.ac2d5040.js.map",
-    "static/css/2.2a88c607.chunk.css": "/react-gh-pages/static/css/2.2a88c607.chunk.css",
-    "static/js/2.6d5f61f9.chunk.js": "/react-gh-pages/static/js/2.6d5f61f9.chunk.js",
-    "static/js/2.6d5f61f9.chunk.js.map": "/react-gh-pages/static/js/2.6d5f61f9.chunk.js.map",
-    "index.html": "/react-gh-pages/index.html",
-    "precache-manifest.5e26c1f19984ecbffac2f99678b63932.js": "/react-gh-pages/precache-manifest.5e26c1f19984ecbffac2f99678b63932.js",
-    "service-worker.js": "/react-gh-pages/service-worker.js",
-    "static/css/2.2a88c607.chunk.css.map": "/react-gh-pages/static/css/2.2a88c607.chunk.css.map",
-    "static/css/main.02a03453.chunk.css.map": "/react-gh-pages/static/css/main.02a03453.chunk.css.map"
+    "main.css": "/analisador-preditivo/static/css/main.f48e49ba.chunk.css",
+    "main.js": "/analisador-preditivo/static/js/main.c0dd3a77.chunk.js",
+    "main.js.map": "/analisador-preditivo/static/js/main.c0dd3a77.chunk.js.map",
+    "runtime~main.js": "/analisador-preditivo/static/js/runtime~main.05581637.js",
+    "runtime~main.js.map": "/analisador-preditivo/static/js/runtime~main.05581637.js.map",
+    "static/css/2.2a88c607.chunk.css": "/analisador-preditivo/static/css/2.2a88c607.chunk.css",
+    "static/js/2.da33f143.chunk.js": "/analisador-preditivo/static/js/2.da33f143.chunk.js",
+    "static/js/2.da33f143.chunk.js.map": "/analisador-preditivo/static/js/2.da33f143.chunk.js.map",
+    "index.html": "/analisador-preditivo/index.html",
+    "precache-manifest.11b4577008f20474d35584aaacbd7056.js": "/analisador-preditivo/precache-manifest.11b4577008f20474d35584aaacbd7056.js",
+    "service-worker.js": "/analisador-preditivo/service-worker.js",
+    "static/css/2.2a88c607.chunk.css.map": "/analisador-preditivo/static/css/2.2a88c607.chunk.css.map",
+    "static/css/main.f48e49ba.chunk.css.map": "/analisador-preditivo/static/css/main.f48e49ba.chunk.css.map"
   }
 }
