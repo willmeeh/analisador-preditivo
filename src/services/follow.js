@@ -14,9 +14,9 @@ const follow = (terminal, grammar, firsts, follows) => {
             let entrou = false;
             let location = sentencas.indexOf(terminal);
 
-            // if (terminal === 'X') {
-            //     console.log(1);
-            // }
+            if (terminal === 'X') {
+                console.log(1);
+            }
 
             if (location !== -1) {
 

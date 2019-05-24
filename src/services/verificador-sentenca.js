@@ -16,11 +16,14 @@ const escreverTabelafinal = (tabelaFinal) => {
 
     }
 
-    if (tabelaFinal.entrada[tamanho-1] === tabelaFinal.pilha[tamanho-1]
-        && tabelaFinal.entrada[tamanho-1] === '$') {
+    
+    let teste = tabelaFinal.entrada[tamanho-1].join() + tabelaFinal.pilha[tamanho-1].join();
+    if (teste === '$$') {
         console.log("Aceita");
+        alert("Aceita");
     } else {
         console.log("Rejeita");
+        alert("Rejeita");
     }
 
 }
@@ -75,14 +78,7 @@ const verificarSentenca = (pilha, entrada, tabelaPreditivaTabular) => {
     }
     
     escreverTabelafinal(tabelaFinal);
-    let tamanho = tabelaFinal.pilha.length;
-    // console.log('tamanho', tamanho)
-    if (tamanho && tamanho > 0 && tabelaFinal.entrada[tamanho-1] === tabelaFinal.pilha[tamanho-1]
-        && tabelaFinal.entrada[tamanho-1] === '$') {
-        return true;
-    } else {
-        return false;
-    }
+    return tabelaFinal;
 }
 
 export const testSentenceInPredictiveTable = (
@@ -93,6 +89,18 @@ export const testSentenceInPredictiveTable = (
     if (sentence && typeof sentence !== 'array') {
         sentence = sentence.split(' ');
     }
+    return verificarSentenca(["$", initSymbol], sentence, predictiveTable);
+}
+
+export const testSentenceInPredictiveTableData = (
+    initSymbol,
+    predictiveTable,
+    sentence
+) => {
+    if (sentence && typeof sentence !== 'array') {
+        sentence = sentence.split(' ');
+    }
+    console.log(["$", initSymbol], sentence, predictiveTable);
     return verificarSentenca(["$", initSymbol], sentence, predictiveTable);
 }
 // verificarSentenca(["$", "E"], ["a", "+", "a", "+", "a", "$"], arthur_d1);
